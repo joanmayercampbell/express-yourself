@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
 
 namespace ExpressYourself
 {
@@ -16,25 +18,85 @@ namespace ExpressYourself
         public static string GetTitle(string str)
         {
             // TODO
-            return "";
+            var titleExpression = new Regex(@"Title\: (.*),+");
+
+            var match = titleExpression.Match(str);
+
+            if (!match.Success)
+            {
+                return "Title not found";
+            }
+            else
+            {
+                return match.Groups[1].Value;
+            }
+         
         }
 
         public static string GetType(string str)
         {
-            // TODO
-            return "";
-        }
 
-        public static string GetLength(string str)
+            var typeExpression = new Regex(@"Type\: (.*),Title\: (.*),");
+
+            var match = typeExpression.Match(str);
+
+            if (!match.Success)
+            {
+                return "No type found";
+            }
+            else
+            {
+                return match.Groups[1].Value;
+            }
+
+        }
+                    
+            public static string GetLength(string str)
         {
-            // TODO
-            return "";
+            
+
+            var lengthExpression = new Regex(@"Type\: (.*),Title\: (.*),Length\: (.*)");
+
+            var match = lengthExpression.Match(str);
+
+           // Console.WriteLine(match.Groups[3].Value);
+           // Console.ReadKey();
+
+            if (!match.Success)
+            {
+                return "No type found";
+            }
+            else
+            {
+                return match.Groups[3].Value;
+            }
+
+
+
+
         }
 
         public static bool IsValidLine(string str)
         {
-            // TODO
-            return false;
+            
+
+        
+            var validExpression = new Regex(@"Type\:.*,Title\:.*Length\:.*");
+
+            var match = validExpression.Match(str);
+
+            
+            if (!match.Success)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+
+
         }
     }
 }
