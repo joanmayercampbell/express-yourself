@@ -55,20 +55,18 @@ namespace ExpressYourself
         {
             
 
-            var lengthExpression = new Regex(@"Type\: (.*),Title\: (.*),Length\: (.*)");
+            var lengthExpression = new Regex(@",Length\: (.*)");
 
             var match = lengthExpression.Match(str);
 
-           // Console.WriteLine(match.Groups[3].Value);
-           // Console.ReadKey();
-
+           
             if (!match.Success)
             {
                 return "No type found";
             }
             else
             {
-                return match.Groups[3].Value;
+                return match.Groups[1].Value;
             }
 
 
